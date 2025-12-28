@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "raglib"
+version = "0.1.0"
+description = "A library of RAG related functions"
+authors = ["firebreather-heart <dtenny95@gmail.com>"]
+license = "GNU"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+google-generativeai = "^0.8.6"
+numpy = "^2.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
