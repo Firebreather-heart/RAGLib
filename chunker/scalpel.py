@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Generator, Tuple
 from string import whitespace, punctuation
 
 
@@ -17,6 +17,22 @@ def chunk_str(input_str:str, chunk_size:int, chunk_overlap:int)->List[str]:
         chunk_cutoff = overlap_point(input_str[:cut_off], chunk_overlap)
         input_str = input_str[(len(chunk) - chunk_cutoff):]
     return bucket
+
+def chunk_generator(input_str:str, chunk_size:int, chunk_overlap:int)->Generator[Tuple[str, int], None, None]:
+    if len(input_str) < chunk_size:
+        yield (input_str, 0)
+        return
+
+    while len(input_str) > 0:
+        chunk, cut_off = clean_cut(input_str, chunk_size)
+        chunk_cutoff = overlap_point(input_str[:cut_off], chunk_overlap)
+        # input_str = input_str[(len(chunk) - chunk_cutoff):]
+        yield chunk, chunk_cutoff
+
+        step = len(chunk) - chunk_cutoff
+        if step <= 0:
+            step = 1
+        input_str = input_str[step:]
     
 
 
